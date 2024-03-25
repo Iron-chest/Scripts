@@ -1,8 +1,8 @@
 Video Link -- https://youtu.be/e42hIYkvxoQ
 ============================================================= Install and Configure the Jenkins-Master & Jenkins-Agent =============================================================
 ## Install Java
-$ sudo apt update
-$ sudo apt upgrade
+$ sudo apt update -y
+$ sudo apt upgrade -y
 $ sudo nano /etc/hostname
 $ sudo init 6
 $ sudo apt install openjdk-17-jre
@@ -15,8 +15,8 @@ curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   https://pkg.jenkins.io/debian binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
-sudo apt-get update
-sudo apt-get install jenkins
+sudo apt-get update -y
+sudo apt-get install jenkins 
 
 $ sudo systemctl enable jenkins       //Enable the Jenkins service to start at boot
 $ sudo systemctl start jenkins        //Start Jenkins as a service
@@ -28,13 +28,13 @@ $ cd .ssh
 
 ============================================================= Install and Configure the SonarQube =============================================================
 ## Update Package Repository and Upgrade Packages
-    $ sudo apt update
-    $ sudo apt upgrade
+    $ sudo apt update -y
+    $ sudo apt upgrade -y
 ## Add PostgresSQL repository
     $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
     $ wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc &>/dev/null
 ## Install PostgreSQL
-    $ sudo apt update
+    $ sudo apt update -y
     $ sudo apt-get -y install postgresql postgresql-contrib
     $ sudo systemctl enable postgresql
 ## Create Database for Sonarqube
@@ -52,7 +52,7 @@ $ cd .ssh
     $ wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc
     $ echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
  ## Install Java 17
-    $ apt update
+    $ apt update -y
     $ apt install temurin-17-jdk
     $ update-alternatives --config java
     $ /usr/bin/java --version
@@ -68,6 +68,8 @@ $ cd .ssh
     sudo vim /etc/sysctl.conf
     //Paste the below values at the bottom of the file
     vm.max_map_count = 262144
+   # Reboot the server
+   sudo init 6
 
 #### Sonarqube Installation ####
 ## Download and Extract
